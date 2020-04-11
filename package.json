@@ -1,0 +1,15 @@
+{
+    "name": "project-qut-982",
+    "version": "1.0.0",
+    "description": "This is the project for qut 982",
+    "main": "index.js",
+    "scripts": {
+        "sass:compile": "node-sass sass/style.scss -o style/",
+        "sass:watch": "nodemon -e scss -x \"npm run sass:compile\""
+    },
+    "author": "Sajjad Hadi",
+    "license": "ISC",
+    "devDependencies": {
+        "node-sass": "^4.13.1"
+    }
+}
