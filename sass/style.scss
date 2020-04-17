@@ -1,9 +1,22 @@
-$color-primary: red;
-$color-secondary: black;
-$color-tertiary: #eee;
+$color-primary: #ff6412;
+$color-secondary: #eef0f9;
+$color-tertiary: #fd9243;
+$color-quaternary: #f0583d;
+$color-quinary: #2057eb;
+$color-senary: orangered;
+
+$color-dark-1: #555;
+$color-dark-2: #777;
 
 $font-primary: "Quicksand", sans-serif;
 $font-secondary: "Baloo Paaji 2", cursive;
+
+@mixin centeredBackground($bg-address) {
+    background-image: url($bg-address);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
 
 @mixin fourCardBasedComponents($min-grid-size: 250px) {
     display: flex;
@@ -22,10 +35,6 @@ $font-secondary: "Baloo Paaji 2", cursive;
         grid-template-columns: repeat(4, 1fr);
         grid-auto-rows: minmax($min-grid-size, auto);
         gap: 20px;
-
-        &_item {
-            border: 1px solid black;
-        }
     }
 }
 
@@ -39,6 +48,7 @@ $font-secondary: "Baloo Paaji 2", cursive;
     border: none;
     font-family: $font-primary;
     font-weight: 500;
+    color: inherit;
 }
 
 .header {
@@ -47,10 +57,11 @@ $font-secondary: "Baloo Paaji 2", cursive;
     &__nav {
         &_top,
         &_bottom {
-            padding: 30px;
+            padding: 20px 30px;
         }
+
         &_top {
-            background-color: red;
+            background-color: $color-secondary;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -76,7 +87,8 @@ $font-secondary: "Baloo Paaji 2", cursive;
             }
         }
         &_bottom {
-            background-color: orange;
+            background-color: $color-primary;
+            color: $color-secondary;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -88,6 +100,12 @@ $font-secondary: "Baloo Paaji 2", cursive;
                     align-items: center;
 
                     &_item {
+                        transition: 0.1s ease-in;
+
+                        &:hover {
+                            color: $color-quinary;
+                        }
+
                         &:not(:last-child) {
                             margin-right: 30px;
                         }
@@ -97,13 +115,21 @@ $font-secondary: "Baloo Paaji 2", cursive;
 
             &_user {
                 &_list {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-
                     &_item {
-                        &:not(:last-child) {
-                            margin-right: 30px;
+                        padding: 10px 15px;
+                        transition: all 0.2s ease-in;
+
+                        &:first-child {
+                            background-color: $color-tertiary;
+                            margin-right: 10px;
+                        }
+
+                        &:last-child {
+                            background-color: $color-quaternary;
+                        }
+
+                        &:hover {
+                            background-color: rgba($color-quinary, 0.8);
                         }
                     }
                 }
@@ -115,53 +141,163 @@ $font-secondary: "Baloo Paaji 2", cursive;
 .main {
     &__landing {
         margin: 20px;
-        &_list {
-            display: grid;
-            grid-template-columns: 3fr 1fr;
-            grid-auto-rows: minmax(150px, auto);
-            gap: 15px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: minmax(300px, auto);
+        gap: 15px;
 
-            &_item {
-                background-color: black;
-                border: white 1px solid;
-                &:first-child {
-                    grid-column: 1/2;
-                    grid-row: 1/4;
-                    background-color: purple;
-                }
+        &_item {
+            position: relative;
 
-                &:nth-child(2) {
-                    background-color: yellow;
-                }
+            &:nth-child(1) {
+                grid-column: 1/2;
+                grid-row: 1/3;
 
-                &:nth-child(3) {
-                    background-color: pink;
-                }
+                @include centeredBackground(
+                    "../images/clem-onojeghuo-7a6ptA97LXA-unsplash.jpg"
+                );
+            }
 
-                &:nth-child(4) {
-                    background-color: green;
-                }
+            &:nth-child(2) {
+                grid-column: 2/3;
+                grid-row: 1/2;
+
+                @include centeredBackground(
+                    "../images/maksim-larin-NOpsC3nWTzY-unsplash.jpg"
+                );
+            }
+
+            &:nth-child(3) {
+                grid-column: 3/4;
+                grid-row: 1/2;
+
+                @include centeredBackground(
+                    "../images/tsaush-aKmyHlgB09o-unsplash.jpg"
+                );
+            }
+
+            &:nth-child(4) {
+                grid-column: 2/4;
+                grid-row: 2;
+
+                @include centeredBackground(
+                    "../images/waldemar-brandt-Db4d6MRIXJc-unsplash.jpg"
+                );
+            }
+
+            &:nth-child(5) {
+                grid-column: 4/5;
+                grid-row: 1/3;
+
+                @include centeredBackground(
+                    "../images/javier-reyes-qi2cD5oR_fE-unsplash.jpg"
+                );
+            }
+
+            &_title {
+                background-color: $color-primary;
+                color: $color-secondary;
+                border-radius: 50px;
+                padding: 3px 8px;
+                position: absolute;
+                left: 10px;
+                top: 10px;
             }
         }
     }
 
     &__features {
         &_title {
-            margin-bottom: 30px;
             font-family: $font-secondary;
         }
         @include fourCardBasedComponents();
 
-        background-color: #eee;
+        &_list {
+            &_item {
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                flex-direction: column;
+
+                &_img {
+                    max-height: 128px;
+                }
+
+                &_title {
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    color: $color-dark-1;
+                }
+            }
+        }
     }
 
     &__products {
-        background-color: red;
+        background-color: $color-secondary;
+
+        border-bottom: 1px solid white;
+
+        &_title {
+            color: $color-senary;
+        }
 
         @include fourCardBasedComponents(400px);
 
-        &_item {
-            color: white;
+        &_list {
+            &_item {
+                background-color: white;
+                border-radius: 20px;
+                position: relative;
+                overflow: hidden;
+
+                &_img {
+                    width: 100%;
+                }
+
+                &_content {
+                    padding: 15px 30px;
+
+                    &_title {
+                        font-size: 20px;
+                        font-weight: bold;
+                        color: $color-quaternary;
+                    }
+
+                    &_description {
+                        font-size: 14px;
+                        margin-top: 15px;
+                        color: $color-dark-2;
+                    }
+
+                    &_info {
+                        position: absolute;
+                        bottom: 30px;
+                        left: 30px;
+                        right: 30px;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+
+                        &_btns {
+                            &_cart,
+                            &_more {
+                                border-radius: 20px;
+                                color: white;
+                                padding: 3px 12px;
+                                font-size: 14px;
+                            }
+                            &_cart {
+                                margin-right: 5px;
+                                background-color: $color-quaternary;
+                            }
+
+                            &_more {
+                                background-color: $color-quinary;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -172,28 +308,42 @@ $font-secondary: "Baloo Paaji 2", cursive;
         display: grid;
         grid-template-columns: repeat(3, 1fr) 2fr;
         gap: 20px;
-        background-color: yellowgreen;
+        background-color: $color-quinary;
+        color: white;
+        font-size: 14px;
+        min-height: 200px;
 
         &_item {
             &_sublist {
                 &_item {
+                    &:not(:last-child) {
+                        margin-bottom: 10px;
+                    }
                 }
             }
 
             &_email {
                 &_title {
+                    margin-bottom: 15px;
                 }
 
                 &_form {
-                    background-color: orange;
-
                     &_label {
-                    }
+                        &_input {
+                            color: $color-dark-1;
+                            width: 300px;
+                            height: 30px;
+                            text-indent: 20px;
+                            border-radius: 50px;
+                        }
 
-                    &_input {
-                    }
-
-                    &_submit {
+                        &_submit {
+                            background-color: $color-quaternary;
+                            padding: 7px 12px;
+                            border-radius: 0 50px 50px 0;
+                            margin-left: -30px;
+                            cursor: pointer;
+                        }
                     }
                 }
             }
@@ -203,8 +353,18 @@ $font-secondary: "Baloo Paaji 2", cursive;
     &__copyright {
         padding: 10px 20px;
         text-align: center;
+        background-color: $color-quaternary;
 
+        & a {
+            text-decoration: underline;
+            transition: all 0.2s ease-in;
+
+            &:hover {
+                color: $color-quinary;
+            }
+        }
         &_title {
+            color: white;
         }
     }
 }
